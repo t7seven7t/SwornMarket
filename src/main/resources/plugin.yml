@@ -1,0 +1,76 @@
+name: SwornMarket
+version: "${project.version}"
+main: net.t7seven7t.swornmarket.SwornMarket
+#commands:
+depend: [Vault, WorldEdit]
+database: false
+description: "Sign shop plugin that adds player-owned and managed stores."
+author: "t7seven7t"
+authors:
+  - "t7seven7t"
+load: postworld
+commands:
+  shop:
+    aliases: [s]
+permissions:
+    swornmarket.admin:
+        description: All permissions.
+        children:
+            swornmarket.create: true
+            swornmarket.create.any: true
+            swornmarket.manage.any: true
+            swornmarket.modifyname: true
+            swornmarket.cmd.delete: true
+            swornmarket.cmd.infinite: true
+            swornmarket.cmd.rotate: true
+            swornmarket.cmd.setowner: true
+            swornmarket.cmd.teleport: true
+            swornmarket.user: true
+    swornmarket.user:
+        description: User permissions.
+        children:
+            swornmarket.cmd.buy: true
+            swornmarket.cmd.sell: true
+            swornmarket.cmd.set: true
+            swornmarket.cmd.set.sell: true
+            swornmarket.cmd.set.buy: true
+            swornmarket.cmd.manager: true
+            swornmarket.cmd.item.add: true
+            swornmarket.cmd.item.remove: true
+            swornmarket.cmd.item.withdraw: true
+    swornmarket.create:
+        default: op
+    swornmarket.create.any:
+        default: op
+    swornmarket.cmd.buy:
+        default: true
+    swornmarket.cmd.infinite:
+        default: op
+    swornmarket.cmd.sell:
+        default: true
+    swornmarket.cmd.set:
+        default: true
+    swornmarket.cmd.set.sell:
+        default: true
+    swornmarket.cmd.set.buy:
+        default: true
+    swornmarket.modifyname:
+        default: op
+    swornmarket.manage.any:
+        default: op
+    swornmarket.cmd.delete:
+        default: op
+    swornmarket.cmd.rotate:
+        default: op
+    swornmarket.cmd.setowner:
+        default: op
+    swornmarket.cmd.teleport:
+        default: op
+    swornmarket.cmd.manager:
+        default: true
+    swornmarket.cmd.item.add:
+        default: true
+    swornmarket.cmd.item.remove:
+        default: true
+    swornmarket.cmd.item.withdraw:
+        default: true
