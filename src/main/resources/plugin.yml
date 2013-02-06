@@ -6,8 +6,6 @@ depend: [Vault, WorldEdit]
 database: false
 description: "Sign shop plugin that adds player-owned and managed stores."
 author: "t7seven7t"
-authors:
-  - "t7seven7t"
 load: postworld
 commands:
   shop:

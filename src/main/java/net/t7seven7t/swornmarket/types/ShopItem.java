@@ -31,6 +31,7 @@ public class ShopItem implements ConfigurationSerializable {
 	private double buyPrice;
 	private double sellPrice;
 	private int buyAmount;
+	private boolean infinite;
 	
 	public ShopItem(ItemStack itemStack, double buyPrice, int buyAmount, double sellPrice) {
 		this.itemStack = itemStack;
@@ -62,6 +63,9 @@ public class ShopItem implements ConfigurationSerializable {
 		
 		if (map.get("buyAmount") != null)
 			buyAmount = (Integer) map.get("buyAmount");
+		
+		if (map.get("infinite") != null)
+			infinite = (Boolean) map.get("infinite");
 	}
 	
 	public Map<String, Object> serialize() {
@@ -73,7 +77,17 @@ public class ShopItem implements ConfigurationSerializable {
 			args.put("sellPrice", sellPrice);
 		if (buyAmount != 0)
 			args.put("buyAmount", buyAmount);
+		if (infinite)
+			args.put("infinite", infinite);
 		return args;
+	}
+	
+	public boolean isInfinite() {
+		return infinite;
+	}
+	
+	public void setInfinite(boolean b) {
+		infinite = b;
 	}
 	
 	public void setAmount(int amount) {
@@ -113,8 +127,8 @@ public class ShopItem implements ConfigurationSerializable {
 		if (itemStack.getItemMeta() instanceof SkullMeta && ((SkullMeta) itemStack.getItemMeta()).hasOwner())
 			name.append("(" + ((SkullMeta) itemStack.getItemMeta()).getOwner());
 		
-		result.append(String.format("%-40s", name.toString()));
-		result.append("&7[" + (itemStack.getAmount() == -1 ? "infinite" : itemStack.getAmount()) + "] ");
+		result.append(String.format("%-30s", name.toString()));
+		result.append("&7[" + (infinite ? "infinite" : itemStack.getAmount()) + "] ");
 		result.append("&7[&6" + (sellPrice == 0 ? "-" : SwornMarket.getEconomy().format(sellPrice)));
 		result.append("&7/&6" + (buyPrice == 0 ? "-" : SwornMarket.getEconomy().format(buyPrice)) + "&7]");
 		return FormatUtil.format(result.toString());

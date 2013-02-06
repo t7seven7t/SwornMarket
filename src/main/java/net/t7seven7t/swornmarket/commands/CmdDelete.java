@@ -55,6 +55,7 @@ public class CmdDelete extends SwornMarketCommand {
 		data.setSignText(deletedShopText);
 		sendMessage(plugin.getMessage("confirm-shop-deleted"), data.getAppendedName());
 		plugin.getLogHandler().log(plugin.getMessage("log-shop-deleted"), player.getName(), data.getOwner(), data.getAppendedName(), data.getId());
+		plugin.getShopSelectionHandler().deselectShop(player);
 	}
 	
 }

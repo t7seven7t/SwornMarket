@@ -38,7 +38,11 @@ public class CmdInfinite extends SwornMarketCommand {
 		
 		ShopItem item = shop.getItems().get(index);
 		
-		item.setAmount(-1);
+		if (item.isInfinite()) {
+			item.setInfinite(false);
+		} else {
+			item.setInfinite(true);
+		}
 		
 		sendMessage(plugin.getMessage("confirm-item-infinite"), item.getName());
 		plugin.getLogHandler().log(plugin.getMessage("log-item-infinite"), player.getName(), item.getName(), shop.getId());

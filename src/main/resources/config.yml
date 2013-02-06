@@ -1,2 +1,2 @@
-convert-old-data: true
+convert-old-data: false
 minute-delay-between-saves: 20

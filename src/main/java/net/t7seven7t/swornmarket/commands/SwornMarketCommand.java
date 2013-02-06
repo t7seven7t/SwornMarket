@@ -217,7 +217,7 @@ public abstract class SwornMarketCommand {
 	protected int getAmountInInventory(ItemStack item) {
 		int amount = 0;
 		for (ItemStack stack : player.getInventory().getContents()) {
-			if (stack.isSimilar(item))
+			if (stack != null && stack.isSimilar(item))
 				amount += stack.getAmount();
 		}
 		return amount;

@@ -30,24 +30,35 @@ public class ShopDataConverter {
 		File folder = new File(plugin.getDataFolder(), "shops");
 		
 		for (File file : folder.listFiles()) {
-			Shop oldData = new Shop();
-			SPersist.load(oldData, Shop.class, file);
-						
-			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("world", oldData.world);
-			data.put("location", new net.t7seven7t.util.SimpleVector(oldData.location.x, oldData.location.y, oldData.location.z));
-			data.put("name", oldData.name);
-			data.put("owner", oldData.owner);
-			
-			List<net.t7seven7t.swornmarket.types.ShopItem> newItems = new ArrayList<net.t7seven7t.swornmarket.types.ShopItem>();
-			for (ShopItem item : oldData.items)
-				newItems.add(item.toNewShopItem());
-			
-			data.put("items", newItems);
-			
-			ShopData newData = (ShopData) ConfigurationSerialization.deserializeObject(data, ShopData.class);
-			FileSerialization.save(newData, new File(folder, file.getName() + ".dat"));
-			file.delete();
+			try {
+				if (file.getName().contains(".dat"))
+					return;
+				
+				Shop oldData = new Shop();
+				SPersist.load(oldData, Shop.class, file);
+							
+				Map<String, Object> data = new HashMap<String, Object>();
+				data.put("world", oldData.world);
+				data.put("location", new net.t7seven7t.util.SimpleVector(oldData.location.x, oldData.location.y, oldData.location.z));
+				data.put("name", oldData.name);
+				data.put("owner", oldData.owner);
+				
+				if (oldData.items != null) {
+					List<net.t7seven7t.swornmarket.types.ShopItem> newItems = new ArrayList<net.t7seven7t.swornmarket.types.ShopItem>();
+					for (ShopItem item : oldData.items)
+						newItems.add(item.toNewShopItem());
+					
+					data.put("items", newItems);
+				}
+				
+				ShopData newData = (ShopData) ConfigurationSerialization.deserializeObject(data, ShopData.class);
+				FileSerialization.save(newData, new File(folder, file.getName() + ".dat"));
+				file.delete();
+			} catch (NullPointerException ex) {
+				System.out.println("Could not read old shop data. Deleting it.");
+				file.delete();
+				continue;
+			}
 		}
 		
 		logger.log("Old shop data converted! Took {0}ms", System.currentTimeMillis() - start);

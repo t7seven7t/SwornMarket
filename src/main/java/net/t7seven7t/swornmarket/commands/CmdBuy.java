@@ -130,7 +130,7 @@ public class CmdBuy extends SwornMarketCommand {
 			sendMessage(plugin.getMessage("confirm-set-buy"), item.getBuyAmount(), item.getName(), SwornMarket.getEconomy().format(item.getBuyPrice()));
 			plugin.getLogHandler().log(plugin.getMessage("log-set-buy"), player.getName(), item.getName(), item.getBuyAmount(), item.getBuyPrice(), shop.getId());
 		} else {
-			if (id < 0 || index < 0) {
+			if (index < 0) {
 				err(plugin.getMessage("error-item-not-found"), args[0]);
 				return;
 			}
@@ -149,7 +149,7 @@ public class CmdBuy extends SwornMarketCommand {
 			
 			ItemStack item = shop.getItems().get(index).getItemStack().clone();
 			
-			if (item.getAmount() < amount) {
+			if (item.getAmount() < amount && !shop.getItems().get(index).isInfinite()) {
 				err(plugin.getMessage("error-shop-stock"), amount, ItemType.toName(item.getTypeId()));
 				return;
 			}
@@ -163,7 +163,7 @@ public class CmdBuy extends SwornMarketCommand {
 			SwornMarket.getEconomy().depositPlayer(shop.getOwner(), price);
 			
 			// Don't subtract if item stock is infinite
-			if (shop.getItems().get(index).getItemStack().getAmount() != -1)
+			if (!shop.getItems().get(index).isInfinite())
 				shop.getItems().get(index).subtractAmount(amount);
 			
 			player.getInventory().addItem(item);

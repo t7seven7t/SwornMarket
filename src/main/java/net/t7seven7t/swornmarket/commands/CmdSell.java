@@ -77,7 +77,7 @@ public class CmdSell extends SwornMarketCommand {
 				return;
 			}
 			
-			if (shop.getItems().get(index).getBuyAmount() < amount) {
+			if (shop.getItems().get(index).getBuyAmount() < amount && !shop.getItems().get(index).isInfinite()) {
 				err(plugin.getMessage("error-not-buying-that-much"), shop.getAppendedName(), shop.getItems().get(index).getBuyAmount(), shop.getItems().get(index).getName());
 				return;
 			}
@@ -101,7 +101,7 @@ public class CmdSell extends SwornMarketCommand {
 			player.getInventory().removeItem(item);
 			
 			// Don't add if item stock is infinite.
-			if (shop.getItems().get(index).getItemStack().getAmount() != -1)
+			if (!shop.getItems().get(index).isInfinite())
 				shop.getItems().get(index).addAmount(amount);
 			
 			sendMessage(plugin.getMessage("confirm-item-sell"), amount, shop.getItems().get(index).getName(), SwornMarket.getEconomy().format(price));

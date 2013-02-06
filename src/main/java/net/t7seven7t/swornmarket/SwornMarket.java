@@ -28,6 +28,7 @@ import net.t7seven7t.swornmarket.commands.CmdManager;
 import net.t7seven7t.swornmarket.commands.CmdPage;
 import net.t7seven7t.swornmarket.commands.CmdRemove;
 import net.t7seven7t.swornmarket.commands.CmdRotate;
+import net.t7seven7t.swornmarket.commands.CmdSearch;
 import net.t7seven7t.swornmarket.commands.CmdSell;
 import net.t7seven7t.swornmarket.commands.CmdSet;
 import net.t7seven7t.swornmarket.commands.CmdSetName;
@@ -120,6 +121,7 @@ public class SwornMarket extends JavaPlugin {
 		commandHandler.registerCommand(new CmdPage(this));
 		commandHandler.registerCommand(new CmdRemove(this));
 		commandHandler.registerCommand(new CmdRotate(this));
+		commandHandler.registerCommand(new CmdSearch(this));
 		commandHandler.registerCommand(new CmdSell(this));
 		commandHandler.registerCommand(new CmdSet(this));
 		commandHandler.registerCommand(new CmdSetName(this));

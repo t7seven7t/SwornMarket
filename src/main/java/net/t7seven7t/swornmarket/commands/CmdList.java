@@ -36,7 +36,7 @@ public class CmdList extends PaginatedCommand {
 
 	@Override
 	public String getLine(int index) {
-		if (plugin.getShopDataCache().getData(index) != null)
+		if (plugin.getShopDataCache().getData(index) != null && plugin.getShopDataCache().getData(index).isOwned())
 			return FormatUtil.format(	plugin.getMessage("shop-list-entry"), 
 										index, 
 										plugin.getShopDataCache().getData(index).getAppendedName(), 
