@@ -36,7 +36,7 @@ public class CmdCreate extends SwornMarketCommand {
 		}
 		
 		ShopData data = plugin.getShopDataCache().newData(owner.getName(), player.getLocation());
-		sendMessage(plugin.getMessage("confirm-shop-created"), owner);
+		sendMessage(plugin.getMessage("confirm-shop-created"), owner.getName());
 		plugin.getLogHandler().log(plugin.getMessage("log-shop-created"), owner, player.getName(), data.getId());		
 	}
 
