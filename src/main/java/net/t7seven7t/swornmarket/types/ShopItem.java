@@ -117,15 +117,15 @@ public class ShopItem implements ConfigurationSerializable {
 			name.append(" (" + ChatColor.GOLD + ChatColor.ITALIC + itemStack.getItemMeta().getDisplayName() + ChatColor.YELLOW + ") ");
 		
 		if (itemStack.getEnchantments().size() != 0)
-			name.append("(" + EnchantmentType.toString(itemStack.getEnchantments()) + ")");
+			name.append(" (" + EnchantmentType.toString(itemStack.getEnchantments()) + ")");
 		
 		if (itemStack.getItemMeta() instanceof PotionMeta) {
 			Potion pot = Potion.fromItemStack(itemStack);
-			name.append("(" + PotionType.toString(pot.getEffects()) + ")");
+			name.append(" (" + PotionType.toString(pot.getEffects()) + ")");
 		}
 		
 		if (itemStack.getItemMeta() instanceof SkullMeta && ((SkullMeta) itemStack.getItemMeta()).hasOwner())
-			name.append("(" + ((SkullMeta) itemStack.getItemMeta()).getOwner());
+			name.append(" (" + ((SkullMeta) itemStack.getItemMeta()).getOwner() + ")");
 		
 		result.append(String.format("%-30s", name.toString()));
 		result.append("&7[" + (infinite ? "infinite" : itemStack.getAmount()) + "] ");
